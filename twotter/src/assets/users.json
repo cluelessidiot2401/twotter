@@ -1,0 +1,27 @@
+{
+  "first": "Vikram",
+  "last": "A",
+  "username": "cluelessidiot2401",
+  "email": "vikramambre@gmail.com",
+  "isAdmin": false,
+  "twoots": [
+    {
+      "id": 1,
+      "content": "Twooter is Great!",
+      "likes": 0,
+      "favourited": false
+    },
+    {
+      "id": 2,
+      "content": "I am Groot!",
+      "likes": 0,
+      "favourited": false
+    },
+    {
+      "id": 3,
+      "content": "Need a new phone. Any suggestions?",
+      "likes": 0,
+      "favourited": false
+    }
+  ]
+}

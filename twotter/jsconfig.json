@@ -1,0 +1,14 @@
+{
+    "include": [
+        "./src/**/*", "vue.config.js"
+    ],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "components/*": [
+                "src/components/*"
+            ]
+        },
+        "checkJs": true
+    }
+}
