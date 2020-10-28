@@ -86,15 +86,13 @@ export default {
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
-  grid-row: 2/3;
-  grid-column: 1/2;
   width: 33rem;
   align-self: center;
   justify-self: center;
   margin: 0.5rem auto;
 
   label {
-    margin-left: 2rem;
+    margin: 0 auto;
   }
 
   #newTwoot {
@@ -104,6 +102,7 @@ export default {
   .user-profile__twotter-panel {
     display: flex;
     align-items: baseline;
+    justify-content: center;
     .user-profile__create-twoot-type {
       margin: 0.8rem;
     }
