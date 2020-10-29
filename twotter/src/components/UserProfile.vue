@@ -1,23 +1,25 @@
 <template>
   <div class="user-profile">
-    <div class="user-profile__user-panel">
-      <h1 class="user-profile__username">@{{ user.username }}</h1>
-      <div v-if="user.isAdmin" class="user-profile__admin-badge">
-        Admin
+    <div class="user-profile__container">
+      <div class="user-profile__user-panel">
+        <h1 class="user-profile__username">@{{ state.user.username }}</h1>
+        <div v-if="state.user.isAdmin" class="user-profile__admin-badge">
+          Admin
+        </div>
+        <div v-else class="user-profile__admin-badge">
+          User
+        </div>
+        <div class="user-profile__follower-count">
+          <strong>Followers: </strong> {{ state.followers }}
+        </div>
       </div>
-      <div v-else class="user-profile__admin-badge">
-        User
-      </div>
-      <div class="user-profile__follower-count">
-        <strong>Followers: </strong> {{ followers }}
-      </div>
+      <CreateTwootPanel @create-twoot="createNewTwoot" />
     </div>
-    <CreateTwootPanel @create-twoot="createNewTwoot" />
     <div class="user-profile__twoots-wrapper">
       <TwootItem
-        v-for="twoot in user.twoots"
+        v-for="twoot in state.user.twoots"
         :twoot="twoot"
-        :username="user.username"
+        :username="state.user.username"
         :key="twoot.id"
         @favourite="toggleFavourite"
       />
@@ -29,101 +31,115 @@
 import TwootItem from "./TwootItem";
 import CreateTwootPanel from "./CreateTwootPanel";
 import userdata from "../assets/users.json";
+import { onMounted, reactive, watch } from "vue";
 
 export default {
   name: "UserProfile",
   components: { TwootItem, CreateTwootPanel },
-  data() {
-    return {
+
+  setup() {
+    const state = reactive({
       followers: 0,
       user: userdata,
-    };
-  },
-  watch: {
-    followers(newFollowerCount, oldFollowerCount) {
-      if (oldFollowerCount < newFollowerCount) {
-        console.log(`${this.user.username} has gained followers!`);
-      } else if (oldFollowerCount > newFollowerCount) {
-        console.log(`${this.user.username} has lost followers!`);
+    });
+
+    onMounted(() => {
+      state.followers = 25;
+    });
+
+    watch(
+      () => state.followers,
+      (newFollowerCount, oldFollowerCount) => {
+        if (oldFollowerCount < newFollowerCount) {
+          console.log(
+            `${state.user.username}'s followers increased to ${newFollowerCount}!`
+          );
+        } else if (oldFollowerCount > newFollowerCount) {
+          console.log(
+            `${state.user.username}'s followers decreased to ${newFollowerCount}`
+          );
+        }
       }
-    },
-  },
-  computed: {
-    newTwootCharacterCount() {
-      return this.selectedTwootContent.length;
-    },
-  },
-  methods: {
-    followUser() {
-      this.followers++;
-    },
-    unfollowUser() {
-      this.followers--;
-    },
-    toggleFavourite(twoot) {
+    );
+
+    function followUser() {
+      state.followers++;
+    }
+
+    function unfollowUser() {
+      state.followers--;
+    }
+
+    function toggleFavourite(twoot) {
       twoot.favourited = !twoot.favourited;
-    },
-    createNewTwoot(twootContent) {
-      this.user.twoots.unshift({
-        id: this.user.twoots.length + 1,
+    }
+
+    function createNewTwoot(twootContent) {
+      state.user.twoots.unshift({
+        id: state.user.twoots.length + 1,
         content: twootContent,
         likes: 0,
         favourited: false,
       });
-    },
-  },
-  mounted() {
-    this.followUser();
+    }
+
+    return {
+      state,
+      followUser,
+      unfollowUser,
+      toggleFavourite,
+      createNewTwoot,
+    };
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .user-profile {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-  grid-template-rows: 20vh auto;
-  gap: 5rem;
-  padding: 5rem 5%;
+  display: flex;
+  flex-wrap: wrap;
+  // padding: 5rem 5%;
   height: 100%;
   align-items: baseline;
 
-  .user-profile__user-panel {
-    display: flex;
-    flex-direction: column;
-    margin: 0.5rem auto;
-    padding: 2rem;
-    background-color: white;
-    border-radius: 0.8rem;
-    border: 0.1rem solid #dfe3e8;
-    width: 33rem;
-    grid-column: 1/2;
-    align-self: center;
-    justify-self: center;
-    // height: 12vh;
+  .user-profile__container {
+    flex-grow: 1;
+    margin: 5rem 0.5rem;
 
-    .user-profile__follower-count {
-      margin-top: 1rem;
-    }
+    .user-profile__user-panel {
+      display: flex;
+      flex-direction: column;
+      margin: 0.5rem auto;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 0.8rem;
+      border: 0.1rem solid #dfe3e8;
+      width: 33rem;
 
-    h1 {
-      margin: 0;
-    }
+      .user-profile__follower-count {
+        margin-top: 1rem;
+      }
 
-    .user-profile__admin-badge {
-      background: rebeccapurple;
-      margin-top: 0.8rem;
-      margin-right: auto;
-      border-radius: 0.5rem;
-      padding: 0.2rem 0.5rem;
-      color: white;
+      h1 {
+        margin: 0;
+      }
+
+      .user-profile__admin-badge {
+        background: rebeccapurple;
+        margin-top: 0.8rem;
+        margin-right: auto;
+        border-radius: 0.5rem;
+        padding: 0.2rem 0.5rem;
+        color: white;
+      }
     }
   }
 
   .user-profile__twoots-wrapper {
     // width: 90%;
+    min-width: 20rem;
     margin: 0.5rem 2.5rem;
-    grid-column: auto/span 2;
+    flex-grow: 3;
   }
 }
 </style>

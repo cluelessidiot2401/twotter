@@ -5,7 +5,7 @@
         Twooter
       </div>
       <div class="navigation__user">
-        {{ user.username }}
+        {{ state.user.username }}
       </div>
     </nav>
     <UserProfile />
@@ -14,26 +14,27 @@
 
 <script>
 import UserProfile from "./components/UserProfile";
+import userdata from "./assets/users.json";
+import { reactive } from "vue";
+
 export default {
   name: "App",
   components: {
     UserProfile,
   },
-  data() {
+  setup() {
+    const state = reactive({
+      user: userdata,
+    });
+
     return {
-      user: {
-        username: "CluelessIdiot2401",
-      },
+      state,
     };
   },
 };
 </script>
 
 <style lang="scss">
-html {
-  font-size: 62.5%;
-  /* 62.5% of 16px is 10px */
-}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -43,18 +44,25 @@ html {
   background-color: #f3f5fa;
   box-sizing: border-box;
   height: 100%;
+  width: 100%;
   overflow: auto;
   scrollbar-width: thin;
 
-  nav {
-    display: flex;
-    justify-content: space-between;
-    // width: 100%;
-    background-color: #f0007f;
-    color: white;
-    padding: 0.8rem 8rem;
-    position: sticky;
-    top: 0%;
+  .app {
+    width: 100%;
+
+    nav {
+      display: flex;
+      justify-content: space-around;
+      // width: 100%;
+      // overflow: hidden;
+      background-color: #f0007f;
+      color: white;
+      padding: 0.8rem 8rem;
+      position: sticky;
+      top: 0%;
+      z-index: 1;
+    }
   }
 }
 </style>

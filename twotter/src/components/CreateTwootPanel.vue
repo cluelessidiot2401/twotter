@@ -11,15 +11,15 @@
       name=""
       id="newTwoot"
       rows="4"
-      v-model="selectedTwootContent"
+      v-model="state.selectedTwootContent"
     ></textarea>
     <div class="user-profile__twotter-panel">
       <div class="user-profile__create-twoot-type">
         <label for="newTwootType"><strong>Type: </strong></label>
-        <select id="newTwootType" v-model="selectedTwootType">
+        <select id="newTwootType" v-model="state.selectedTwootType">
           <option
             :value="option.value"
-            v-for="(option, index) in twootTypes"
+            v-for="(option, index) in state.twootTypes"
             :key="index"
           >
             {{ option.name }}
@@ -34,49 +34,33 @@
 </template>
 
 <script>
+import { reactive, computed } from "vue";
 import allTwootTypes from "../assets/twootTypes.json";
 export default {
   name: "UserProfile",
-  data() {
-    return {
+  setup(props, ctx) {
+    const state = reactive({
       selectedTwootType: "instant",
       selectedTwootContent: "",
       twootTypes: allTwootTypes,
+    });
+
+    const newTwootCharacterCount = computed(
+      () => state.selectedTwootContent.length
+    );
+
+    function createNewTwoot() {
+      if (state.selectedTwootContent && state.selectedTwootType !== "draft") {
+        ctx.emit("create-twoot", state.selectedTwootContent);
+        state.selectedTwootContent = "";
+      }
+    }
+
+    return {
+      state,
+      newTwootCharacterCount,
+      createNewTwoot,
     };
-  },
-  watch: {
-    followers(newFollowerCount, oldFollowerCount) {
-      if (oldFollowerCount < newFollowerCount) {
-        console.log(`${this.user.username} has gained followers!`);
-      } else if (oldFollowerCount > newFollowerCount) {
-        console.log(`${this.user.username} has lost followers!`);
-      }
-    },
-  },
-  computed: {
-    newTwootCharacterCount() {
-      return this.selectedTwootContent.length;
-    },
-  },
-  methods: {
-    followUser() {
-      this.followers++;
-    },
-    unfollowUser() {
-      this.followers--;
-    },
-    toggleFavourite(twoot) {
-      twoot.favourited = !twoot.favourited;
-    },
-    createNewTwoot() {
-      if (this.selectedTwootContent && this.selectedTwootType !== "draft") {
-        this.$emit("create-twoot", this.selectedTwootContent);
-        this.selectedTwootContent = "";
-      }
-    },
-  },
-  mounted() {
-    this.followUser();
   },
 };
 </script>
@@ -86,15 +70,13 @@ export default {
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
-  grid-row: 2/3;
-  grid-column: 1/2;
   width: 33rem;
   align-self: center;
   justify-self: center;
   margin: 0.5rem auto;
 
   label {
-    margin-left: 2rem;
+    margin: 0 auto;
   }
 
   #newTwoot {
@@ -104,6 +86,7 @@ export default {
   .user-profile__twotter-panel {
     display: flex;
     align-items: baseline;
+    justify-content: center;
     .user-profile__create-twoot-type {
       margin: 0.8rem;
     }
