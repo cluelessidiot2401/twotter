@@ -33,25 +33,28 @@ export default {
       required: true,
     },
   },
-  methods: {
-    favouriteTwoot(twoot) {
-      this.$emit("favourite", twoot);
-    },
+  setup(props, ctx) {
+    function favouriteTwoot(twoot) {
+      ctx.emit("favourite", twoot);
+    }
+
+    return {
+      favouriteTwoot,
+    };
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .twoot-item {
-  padding: 2rem;
-  margin: 1rem;
+  margin: 1rem auto;
   background-color: white;
-  border-radius: 1rem;
+  border-radius: 0.4rem;
   border: 0.1rem solid #dfe3f8;
   box-sizing: border-box;
   cursor: pointer;
   transition: all 0.25s ease;
-  width: 95%;
+  width: 80%;
   text-align: center;
 
   .user-profile__twoot {
@@ -68,6 +71,11 @@ export default {
       padding: 1rem;
       margin-top: 1rem;
       white-space: pre-wrap;
+      // min-height: 2rem;
+      // overflow: hidden;
+      max-width: 50rem;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .user-profile__twoot-like,

@@ -1,9 +1,9 @@
 {
   "first": "Vikram",
   "last": "A",
-  "username": "CluelessIdiot2401",
+  "username": "_CluelessIdiot2401",
   "email": "vikramambre@gmail.com",
-  "isAdmin": false,
+  "isAdmin": true,
   "twoots": [
     {
       "id": 1,
@@ -19,7 +19,7 @@
     },
     {
       "id": 3,
-      "content": "Need a new phone. Any suggestions?",
+      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam reprehenderit tempore iure fugiat quas velit laborum aperiam minus, sint vero soluta incidunt, perspiciatis!",
       "likes": 0,
       "favourited": false
     }
