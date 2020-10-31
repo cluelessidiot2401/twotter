@@ -5,5 +5,7 @@ module.exports = {
                 additionalData: '@import "@/styles/base.scss";'
             }
         }
-    }
+    },
+
+    lintOnSave: true
 }

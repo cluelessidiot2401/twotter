@@ -1,32 +1,38 @@
 <template>
   <form
     class="user-profile__create-twoot"
-    @submit.prevent="createNewTwoot"
     :class="{ '--exceeded': newTwootCharacterCount > 180 }"
+    @submit.prevent="createNewTwoot"
   >
-    <label for="newTwoot"
-      ><strong>New Twoot</strong> ({{ newTwootCharacterCount }}/180)</label
-    >
+    <label
+      for="newTwoot"
+    ><strong>New Twoot</strong> ({{ newTwootCharacterCount }}/180)</label>
     <textarea
-      name=""
       id="newTwoot"
-      rows="4"
       v-model="state.selectedTwootContent"
-    ></textarea>
+      name=""
+      rows="4"
+    />
     <div class="user-profile__twotter-panel">
       <div class="user-profile__create-twoot-type">
         <label for="newTwootType"><strong>Type: </strong></label>
-        <select id="newTwootType" v-model="state.selectedTwootType">
+        <select
+          id="newTwootType"
+          v-model="state.selectedTwootType"
+        >
           <option
-            :value="option.value"
             v-for="(option, index) in state.twootTypes"
             :key="index"
+            :value="option.value"
           >
             {{ option.name }}
           </option>
         </select>
       </div>
-      <button @click="createNewTwoot" :disabled="newTwootCharacterCount > 180">
+      <button
+        :disabled="newTwootCharacterCount > 180"
+        @click="createNewTwoot"
+      >
         Twoot!
       </button>
     </div>
@@ -38,6 +44,7 @@ import { reactive, computed } from "vue";
 import allTwootTypes from "../assets/twootTypes.json";
 export default {
   name: "UserProfile",
+  emits: ["create-twoot"],
   setup(props, ctx) {
     const state = reactive({
       selectedTwootType: "instant",

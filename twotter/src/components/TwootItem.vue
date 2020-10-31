@@ -1,7 +1,12 @@
 <template>
-  <div class="twoot-item" @click="favouriteTwoot(twoot)">
+  <div
+    class="twoot-item"
+    @click="favouriteTwoot(twoot)"
+  >
     <div class="user-profile__twoot">
-      <div class="twoot-item__user">@{{ username }}</div>
+      <div class="twoot-item__user">
+        @{{ username }}
+      </div>
       <div class="user-profile__twoot-content">
         {{ twoot.content }}
       </div>
@@ -9,7 +14,7 @@
         v-if="twoot.favourited"
         src="../assets/iconmonstr-favorite-3.svg"
         alt=""
-      />
+      >
       <!-- <div class="user-profile__twoot-like">
         <button>
           <img src="../assets/iconmonstr-facebook-like-1.svg" alt="" />Like
@@ -33,6 +38,7 @@ export default {
       required: true,
     },
   },
+  emits: ["favourite"],
   setup(props, ctx) {
     function favouriteTwoot(twoot) {
       ctx.emit("favourite", twoot);

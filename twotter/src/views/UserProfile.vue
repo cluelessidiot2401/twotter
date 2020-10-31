@@ -2,12 +2,19 @@
   <div class="user-profile">
     <div class="user-profile__container">
       <div class="user-profile__user-panel">
-        <h1 class="user-profile__username">@{{ state.user.username }}</h1>
-        <h2>{{ userId }}</h2>
-        <div v-if="state.user.isAdmin" class="user-profile__admin-badge">
+        <h1 class="user-profile__username">
+          @{{ state.user.username }}
+        </h1>
+        <div
+          v-if="state.user.isAdmin"
+          class="user-profile__admin-badge"
+        >
           Admin
         </div>
-        <div v-else class="user-profile__admin-badge">
+        <div
+          v-else
+          class="user-profile__admin-badge"
+        >
           User
         </div>
         <div class="user-profile__follower-count">
@@ -19,9 +26,9 @@
     <div class="user-profile__twoots-wrapper">
       <TwootItem
         v-for="twoot in state.user.twoots"
+        :key="twoot.id"
         :twoot="twoot"
         :username="state.user.username"
-        :key="twoot.id"
         @favourite="toggleFavourite"
       />
     </div>
