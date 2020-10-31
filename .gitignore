@@ -105,3 +105,6 @@ dist
 
 # VS Code files
 .vscode/
+
+# Package json lock
+twotter/package-lock.json

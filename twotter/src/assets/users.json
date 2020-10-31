@@ -1,5 +1,15 @@
 [
   {
+    "first": "Vassily",
+    "last": "Borgov",
+    "username": "_VassilyBorgov",
+    "email": "",
+    "isAdmin": false,
+    "userId": 54,
+    "followers": 875,
+    "twoots": []
+  },
+  {
     "first": "Vikram",
     "last": "A",
     "username": "_CluelessIdiot2401",
@@ -56,16 +66,6 @@
         "favourited": false
       }
     ]
-  },
-  {
-    "first": "Vassily",
-    "last": "Borgov",
-    "username": "_VassilyBorgov",
-    "email": "",
-    "isAdmin": false,
-    "userId": 54,
-    "followers": 875,
-    "twoots": []
   },
   {
     "first": "Elizabeth",

@@ -4,8 +4,8 @@
     <div class="users-list">
       <router-link
         v-for="user in userdata"
-        :to="{ name: 'UserProfile', params: { userId: user.userId } }"
         :key="user.userId"
+        :to="{ name: 'UserProfile', params: { userId: user.userId } }"
       >
         {{ user.username }}
       </router-link>
