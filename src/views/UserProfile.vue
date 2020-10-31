@@ -2,19 +2,11 @@
   <div class="user-profile">
     <div class="user-profile__container">
       <div class="user-profile__user-panel">
-        <h1 class="user-profile__username">
-          @{{ state.user.username }}
-        </h1>
-        <div
-          v-if="state.user.isAdmin"
-          class="user-profile__admin-badge"
-        >
+        <h1 class="user-profile__username">@{{ state.user.username }}</h1>
+        <div v-if="state.user.isAdmin" class="user-profile__admin-badge">
           Admin
         </div>
-        <div
-          v-else
-          class="user-profile__admin-badge"
-        >
+        <div v-else class="user-profile__admin-badge">
           User
         </div>
         <div class="user-profile__follower-count">
@@ -41,6 +33,7 @@ import CreateTwootPanel from "@/components/CreateTwootPanel";
 import userdata from "@/assets/users.json";
 import { useRoute } from "vue-router";
 import { onMounted, reactive, watch, computed } from "vue";
+import { useStore } from "vuex";
 
 export default {
   name: "UserProfile",
@@ -53,6 +46,8 @@ export default {
     const state = reactive({
       user: getUserById(userId),
     });
+    const store = useStore();
+    store.state.User.user = state.user;
 
     onMounted(() => {
       state.followers = 25;
