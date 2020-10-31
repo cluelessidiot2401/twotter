@@ -3,6 +3,7 @@
     <div class="user-profile__container">
       <div class="user-profile__user-panel">
         <h1 class="user-profile__username">@{{ state.user.username }}</h1>
+        <h2>{{ userId }}</h2>
         <div v-if="state.user.isAdmin" class="user-profile__admin-badge">
           Admin
         </div>
@@ -10,7 +11,7 @@
           User
         </div>
         <div class="user-profile__follower-count">
-          <strong>Followers: </strong> {{ state.followers }}
+          <strong>Followers: </strong> {{ state.user.followers }}
         </div>
       </div>
       <CreateTwootPanel @create-twoot="createNewTwoot" />
@@ -28,19 +29,22 @@
 </template>
 
 <script>
-import TwootItem from "./TwootItem";
-import CreateTwootPanel from "./CreateTwootPanel";
-import userdata from "../assets/users.json";
-import { onMounted, reactive, watch } from "vue";
+import TwootItem from "@/components/TwootItem";
+import CreateTwootPanel from "@/components/CreateTwootPanel";
+import userdata from "@/assets/users.json";
+import { useRoute } from "vue-router";
+import { onMounted, reactive, watch, computed } from "vue";
 
 export default {
   name: "UserProfile",
   components: { TwootItem, CreateTwootPanel },
 
   setup() {
+    const route = useRoute();
+    const userId = computed(() => route.params.userId);
+
     const state = reactive({
-      followers: 0,
-      user: userdata,
+      user: getUserById(userId),
     });
 
     onMounted(() => {
@@ -48,7 +52,7 @@ export default {
     });
 
     watch(
-      () => state.followers,
+      () => state.user.followers,
       (newFollowerCount, oldFollowerCount) => {
         if (oldFollowerCount < newFollowerCount) {
           console.log(
@@ -63,11 +67,11 @@ export default {
     );
 
     function followUser() {
-      state.followers++;
+      state.user.followers++;
     }
 
     function unfollowUser() {
-      state.followers--;
+      state.user.followers--;
     }
 
     function toggleFavourite(twoot) {
@@ -83,12 +87,18 @@ export default {
       });
     }
 
+    function getUserById(userId) {
+      return userdata.find((entry) => entry.userId == userId.value);
+    }
+
     return {
       state,
       followUser,
       unfollowUser,
       toggleFavourite,
       createNewTwoot,
+      userId,
+      getUserById,
     };
   },
 };
