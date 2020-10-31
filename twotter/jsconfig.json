@@ -3,7 +3,7 @@
         "./src/**/*", "vue.config.js"
     ],
     "compilerOptions": {
-        "baseUrl": ".",
+        "baseUrl": "@",
         "paths": {
             "components/*": [
                 "src/components/*"

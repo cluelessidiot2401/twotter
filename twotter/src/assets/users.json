@@ -1,27 +1,80 @@
-{
-  "first": "Vikram",
-  "last": "A",
-  "username": "_CluelessIdiot2401",
-  "email": "vikramambre@gmail.com",
-  "isAdmin": true,
-  "twoots": [
-    {
-      "id": 1,
-      "content": "Twooter is Great!",
-      "likes": 0,
-      "favourited": false
-    },
-    {
-      "id": 2,
-      "content": "I am Groot!",
-      "likes": 0,
-      "favourited": false
-    },
-    {
-      "id": 3,
-      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam reprehenderit tempore iure fugiat quas velit laborum aperiam minus, sint vero soluta incidunt, perspiciatis!",
-      "likes": 0,
-      "favourited": false
-    }
-  ]
-}
+[
+  {
+    "first": "Vikram",
+    "last": "A",
+    "username": "_CluelessIdiot2401",
+    "email": "vikramambre@gmail.com",
+    "isAdmin": true,
+    "userId": 1,
+    "followers": 27485,
+    "twoots": [
+      {
+        "id": 1,
+        "content": "Twooter is Great!",
+        "likes": 0,
+        "favourited": false
+      },
+      {
+        "id": 2,
+        "content": "I am Groot!",
+        "likes": 0,
+        "favourited": false
+      },
+      {
+        "id": 3,
+        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam reprehenderit tempore iure fugiat quas velit laborum aperiam minus, sint vero soluta incidunt, perspiciatis!",
+        "likes": 0,
+        "favourited": false
+      }
+    ]
+  },
+  {
+    "first": "Jackie",
+    "last": "Chan",
+    "username": "_JackieChan",
+    "email": "jackie@chan.com",
+    "isAdmin": false,
+    "userId": 2,
+    "followers": 84005,
+    "twoots": [
+      {
+        "id": 1,
+        "content": "Watch rush hour!",
+        "likes": 0,
+        "favourited": false
+      },
+      {
+        "id": 2,
+        "content": "huaahh!",
+        "likes": 0,
+        "favourited": false
+      },
+      {
+        "id": 3,
+        "content": "War! what is it good for, absolutely nothing! Yeaaaahhhhh!",
+        "likes": 0,
+        "favourited": false
+      }
+    ]
+  },
+  {
+    "first": "Vassily",
+    "last": "Borgov",
+    "username": "_VassilyBorgov",
+    "email": "",
+    "isAdmin": false,
+    "userId": 54,
+    "followers": 875,
+    "twoots": []
+  },
+  {
+    "first": "Elizabeth",
+    "last": "Harmon",
+    "username": "_BethHarmonGM",
+    "email": "",
+    "isAdmin": false,
+    "userId": 5,
+    "followers": 5604598,
+    "twoots": []
+  }
+]
